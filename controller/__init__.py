@@ -5,7 +5,7 @@ from http import HTTPStatus
 from apscheduler.schedulers.background import BackgroundScheduler
 from flask import Flask, request
 
-from config import APP_NAME
+from config import *
 from log import get_log_config
 from service import *
 
@@ -61,7 +61,10 @@ def monitor_booking_status():
 # TODO: /monitor/upcoming/<city>/<movie>?email=?
 
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=monitor_booking_started_movies, trigger="interval", seconds=120)
+scheduler.add_job(
+    func=monitor_booking_started_movies,
+    trigger="interval",
+    seconds=BOOKING_STARTED_MONITOR_FREQ_SEC)
 scheduler.start()
 
 # Shut down the scheduler when exiting the app
