@@ -1,5 +1,4 @@
+from service.monitor_booking_started import add_monitor_for_booking_started_movies
+from service.monitor_booking_started import check_booking_started
+from service.monitor_booking_started import monitor_booking_started_movies
 from service.movies_for_city import get_movie_names_for_city
-
-
-def get_movie_urls(city: str) -> list:
-    return get_movie_names_for_city(city)

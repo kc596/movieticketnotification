@@ -5,10 +5,12 @@ import requests
 from log import logger
 
 
-def http_get(url: str) -> str:
+def http_get(url: str):
     headers = {'User-Agent': random_ua()}
     logger().info("Fetching url: %s with header: %s", url, headers)
-    return requests.get(url, headers=headers).content.decode()
+    response = requests.get(url, headers=headers)
+    logger().info("status: %s for url: %s", str(response.status_code), url)
+    return response
 
 
 def random_ua() -> str:

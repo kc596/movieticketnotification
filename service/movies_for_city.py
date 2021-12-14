@@ -34,7 +34,7 @@ def get_movie_urls_for_city(city: str) -> list:
 
 def fetch_script_elements(city: str) -> list:
     bms_response = http_get("https://{}/{}/{}".format(BMS_HOST, city, BMS_PATH_MOVIES))
-    html_element = html.fromstring(bms_response)
+    html_element = html.fromstring(bms_response.content.decode())
     return html_element.findall('.//script')
 
 
