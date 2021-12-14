@@ -18,7 +18,11 @@ def health_check():
 
 @app.route('/movies/list/<city>', methods=['GET'])
 def movies_for_city(city: str):
-    return {"city": city, "movies": get_movie_urls(city)}, HTTPStatus.OK
+    try:
+        movies = get_movie_urls(city)
+        return {"city": city, "movies": movies}, HTTPStatus.OK
+    except Exception as error:
+        return {"city": city, "error": error}, HTTPStatus.INTERNAL_SERVER_ERROR
 
 
 """

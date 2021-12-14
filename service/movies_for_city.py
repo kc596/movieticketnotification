@@ -8,6 +8,21 @@ from log import logger
 from service.http_request import http_get
 
 
+def get_movie_names_for_city(city: str) -> list:
+    movie_urls = get_movie_urls_for_city(city)
+    return extract_names_from_movie_urls(movie_urls, city)
+
+
+def extract_names_from_movie_urls(movie_urls: list, city: str) -> list:
+    names = []
+    for movie_url in movie_urls:
+        prefix = "/{}/{}/".format(city, BMS_PATH_MOVIES)
+        index = movie_url.find(prefix)
+        name = movie_url[index + len(prefix):].split("/")[0]
+        names.append(name)
+    return names
+
+
 ##########################################################################
 # Find all javascript on page which are json,
 # and parse all urls starting with in.bookmyshow.com/city/movies/<movie>
