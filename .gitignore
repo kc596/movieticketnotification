@@ -1,0 +1,23 @@
+#Cache
+__pycache__
+**/.pytest_cache/**
+**/.pytest_cache/
+
+#VSCode 
+/.vscode
+
+#pycharm
+/.idea
+
+#jupyter notebooks
+/notebooks
+
+#reports
+/xunit-reports
+/coverage-reports
+/htmlcov
+/.coverage
+/.scannerwork
+
+#virtual env
+/venv
