@@ -53,10 +53,12 @@ def monitor_booking_started_movies() -> None:
     while len(monitors) > 0:
         entry = monitors.pop()
         logger().info("checking entry : %s", str(entry))
+        # Double check to eliminate false positives
         if check_booking_started(movie_url=entry[0], target_date=entry[1]):
-            logger().info("removing entry: %s", str(entry))
-            BS_MONITORS.remove(entry)
-            send_email(email=entry[2], movie_url=entry[0], date=entry[1])
+            if check_booking_started(movie_url=entry[0], target_date=entry[1]):
+                logger().info("removing entry: %s", str(entry))
+                BS_MONITORS.remove(entry)
+                send_email(email=entry[2], movie_url=entry[0], date=entry[1])
 
 
 def check_booking_started(movie_url: str, target_date: str) -> bool:

@@ -9,7 +9,8 @@ def http_get(url: str):
     headers = {'User-Agent': random_ua()}
     logger().info("Fetching url: %s with header: %s", url, headers)
     response = requests.get(url, headers=headers, allow_redirects=True)
-    logger().info("status: %s for url: %s", str(response.status_code), url)
+    logger().info("url: %s, status: %s, response: %s",
+                  url, str(response.status_code), str(response.text))
     return response
 
 
