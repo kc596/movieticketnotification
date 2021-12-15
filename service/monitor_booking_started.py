@@ -66,15 +66,7 @@ def check_booking_started(movie_url: str, target_date: str) -> bool:
     validate_date(date=target_date)
     response_date = fetch_response_date(movie_url, target_date)
     logger().info("target_date=%s, response_date=%s", str(target_date), str(response_date))
-    response_datetime = datetime(
-        year=int(response_date[0:4]),
-        month=int(response_date[4:6]),
-        day=int(response_date[6:8]))
-    target_datetime = datetime(
-        year=int(target_date[0:4]),
-        month=int(target_date[4:6]),
-        day=int(target_date[6:8]))
-    return target_datetime <= response_datetime
+    return int(target_date) <= int(response_date)
 
 
 def fetch_response_date(movie_url: str, target_date: str) -> str:
